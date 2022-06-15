@@ -86,9 +86,22 @@ const menu = [
   },
 ];
 
-const sectionCenter = document.querySelector('.section-center');
+const sectionCentesr = document.querySelector('.section-center');
+const filterBtns = document.querySelectorAll('.filter-btn');
+
 
 window.addEventListener('DOMContentLoaded', () => {
+  displayMenuItems(menu);
+});
+
+// FilterButtons
+filterBtns.forEach(function (btn) {
+  btn.addEventListener('click', (e) = {
+
+  });
+});
+
+function displayMenuItems(menuItems) {
   let displayMenu = menu.map(function (item) {
     return `<article class="menu-item">
           <img src=${item.img} alt=${item.title} class="photo">
@@ -105,4 +118,4 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   displayMenu = displayMenu.join("");
   sectionCenter.innerHTML = displayMenu;
-});;
+};
