@@ -86,37 +86,50 @@ const menu = [
   },
 ];
 
-const sectionCentesr = document.querySelector('.section-center');
+const sectionCenter = document.querySelector('.section-center');
 const filterBtns = document.querySelectorAll('.filter-btn');
 
 
 window.addEventListener('DOMContentLoaded', () => {
   displayMenuItems(menu);
+  const categories = menu.reduce((values, item) => {
+    if (!values.includes(item.category)) {
+      values.push(item.category);
+    }
+    return values;
+  }, ['all']);
+
 });
 
 // FilterButtons
 filterBtns.forEach(function (btn) {
   btn.addEventListener('click', (e) => {
     const category = e.currentTarget.dataset.id;
-    const menuCategory = menu.filter((menuItem) => {
-      return menuItem;
+    const menuCategory = menu.filter(function (menuItem) {
+      if (menuItem.category === category) {
+        return menuItem;
+      }
     });
-    console.log(menuCategory);
+    if (category === "all") {
+      displayMenuItems(menu);
+    } else {
+      displayMenuItems(menuCategory);
+    }
   });
 });
 
 function displayMenuItems(menuItems) {
-  let displayMenu = menu.map(function (item) {
+  let displayMenu = menuItems.map(function (item) {
     return `<article class="menu-item">
           <img src=${item.img} alt=${item.title} class="photo">
           <div class="item-info">
             <header>
               <h4>${item.title}</h4 >
-      <h4 class="price">${item.price}</h4>
+              <h4 class="price">${item.price}</h4>
             </header >
-    <p class="item-text">
-      ${item.desc}
-    </p>
+            <p class="item-text">
+              ${item.desc}
+            </p>
           </div >
         </article > `;
   });
